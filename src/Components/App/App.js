@@ -10,7 +10,6 @@ function App() {
     const thirdRate = (750000 - 325000) / 10 + secondRate;
 
     const newPrice = price * 1;
-    console.log(newPrice + 20);
 
     // tax bands
     // houses priced £145k-£250k
@@ -33,19 +32,17 @@ function App() {
     // if the price is above £750k return the highest tax band
     if (newPrice > 750000) {
       setLbtt(topBand);
-      console.log("this is", topBand);
     }
     // if the price is between £325k and £750k return the appropriate tax band
-    if (newPrice > 325000) {
+    else if (newPrice > 325000) {
       setLbtt(bandThree);
-      console.log(lbtt);
     }
     // if the price is between £250k and £325k return the appropriate tax band
-    if (newPrice > 250000) {
+    else if (newPrice > 250000) {
       setLbtt(bandTwo);
     }
     // if the price is between £145k and £250k return the lowest tax band
-    if (newPrice > 145000) {
+    else if (newPrice > 145000) {
       setLbtt(lowestBand);
     } else {
       // if the house price is £145k or lower, no LBTT needs to be paid so return 0
@@ -58,7 +55,7 @@ function App() {
       <Input onSearch={calculateLBTT} />
       <div>
         {lbtt === "" && <p></p>}
-        {lbtt !== "" && <p>You will pay £{lbtt} on this</p>}
+        {lbtt !== "" && <p>You will pay £{lbtt} LBTT on this</p>}
       </div>
     </div>
   );
