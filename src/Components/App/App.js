@@ -4,13 +4,15 @@ import { useState } from "react";
 
 function App() {
   const [lbtt, setLbtt] = useState("");
+  const [error, setError] = useState("");
+  const [housePrice, setHousePrice] = useState("");
   function calculateLBTT(price) {
     const firstRate = (250000 - 145000) / 50;
     const secondRate = (325000 - 250000) / 20 + firstRate;
     const thirdRate = (750000 - 325000) / 10 + secondRate;
 
     const newPrice = price * 1;
-
+    setHousePrice(newPrice);
     // tax bands
     // houses priced £145k-£250k
     const lowestBand = (newPrice - 145000) / 50;
@@ -22,40 +24,58 @@ function App() {
     const topBand = (newPrice - 750000) * 0.12 + thirdRate;
 
     // Error handling for if the price submitted is invalid (not a number or a negative number)
-    try {
-      if (Number.isFinite(newPrice) !== true || newPrice < 0) {
-        throw new Error("Invalid price entered");
-      }
-    } catch (err) {
-      throw err;
-    }
+    // try {
+    //   if (Number.isFinite(newPrice) !== true || newPrice < 0) {
+    //     throw new Error("Invalid price entered");
+
+    //   }
+    // } catch (err) {
+    //   throw err;
+    // }
     // if the price is above £750k return the highest tax band
-    if (newPrice > 750000) {
+
+    console.log(error);
+
+    if (Number.isFinite(newPrice) !== true || newPrice < 0) {
+      setLbtt("");
+      setError("Invalid price entered");
+    } else if (newPrice > 750000) {
       setLbtt(topBand);
+      setError("");
     }
     // if the price is between £325k and £750k return the appropriate tax band
     else if (newPrice > 325000) {
       setLbtt(bandThree);
+      setError("");
     }
     // if the price is between £250k and £325k return the appropriate tax band
     else if (newPrice > 250000) {
       setLbtt(bandTwo);
+      setError("");
     }
     // if the price is between £145k and £250k return the lowest tax band
     else if (newPrice > 145000) {
       setLbtt(lowestBand);
+      setError("");
     } else {
       // if the house price is £145k or lower, no LBTT needs to be paid so return 0
       setLbtt(0);
+      setError("");
     }
   }
 
   return (
     <div className="App">
+      <h1>LBTT Calculator</h1>
       <Input onSearch={calculateLBTT} />
       <div>
         {lbtt === "" && <p></p>}
-        {lbtt !== "" && <p>You will pay £{lbtt} LBTT on this</p>}
+        {error !== "" && <p>{error}</p>}
+        {lbtt !== "" && (
+          <p>
+            You will pay £{lbtt} LBTT on a house price of £{housePrice}
+          </p>
+        )}
       </div>
     </div>
   );
