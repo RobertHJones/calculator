@@ -17,7 +17,7 @@ export default function Input({ onSearch }) {
 
   return (
     <form>
-      <input onChange={getValue} placeholder="£Enter Purchase Price"></input>
+      <input onChange={getValue} placeholder="£ Enter Purchase Price"></input>
       <button onClick={calculateLBTT}>Calculate</button>
       <label>
         <input type="checkbox"></input>
