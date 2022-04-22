@@ -6,10 +6,12 @@ function App() {
   const [lbtt, setLbtt] = useState("");
   const [error, setError] = useState("");
   const [housePrice, setHousePrice] = useState("");
-  function calculateLBTT(price) {
+  function calculateLBTT(price, checked) {
     const firstRate = (250000 - 145000) / 50;
     const secondRate = (325000 - 250000) / 20 + firstRate;
     const thirdRate = (750000 - 325000) / 10 + secondRate;
+
+    console.log(checked);
 
     const newPrice = price * 1;
     setHousePrice(newPrice);
@@ -34,7 +36,7 @@ function App() {
     // }
     // if the price is above £750k return the highest tax band
 
-    console.log(error);
+    // console.log(error);
 
     if (Number.isFinite(newPrice) !== true || newPrice < 0) {
       setLbtt("");
@@ -53,12 +55,17 @@ function App() {
       setLbtt(bandTwo);
       setError("");
     }
-    // if the price is between £145k and £250k return the lowest tax band
-    else if (newPrice > 145000) {
+    // if they are a first time buyer and the price is between £175k and £250k return the lowest tax band
+    else if (checked === true && newPrice > 175000) {
+      setLbtt(lowestBand);
+      setError("");
+    }
+    // if they are not a first time buyer and the price is between £145k and £250k return the lowest tax band
+    else if (newPrice > 145000 && checked === false) {
       setLbtt(lowestBand);
       setError("");
     } else {
-      // if the house price is £145k or lower, no LBTT needs to be paid so return 0
+      // if the house price is £145k or lower (or £175k or lower for a first time buyer), no LBTT needs to be paid so return 0
       setLbtt(0);
       setError("");
     }

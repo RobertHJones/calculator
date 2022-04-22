@@ -3,16 +3,21 @@ import { useState } from "react";
 
 export default function Input({ onSearch }) {
   const [price, setPrice] = useState("");
+  const [firstChecked, setFirstChecked] = useState(false);
 
   function getValue(e) {
     setPrice(e.target.value);
     console.log(price);
   }
 
+  function handleChange() {
+    setFirstChecked(!firstChecked);
+  }
+
   function calculateLBTT(e) {
     e.preventDefault();
 
-    onSearch(price);
+    onSearch(price, firstChecked);
   }
 
   return (
@@ -20,7 +25,7 @@ export default function Input({ onSearch }) {
       <input onChange={getValue} placeholder="£ Enter Purchase Price"></input>
       <button onClick={calculateLBTT}>Calculate</button>
       <label>
-        <input type="checkbox"></input>
+        <input type="checkbox" onChange={handleChange}></input>
         First time buyer
       </label>
       <label>
