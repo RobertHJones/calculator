@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function Input({ onSearch }) {
   const [price, setPrice] = useState("");
   const [firstChecked, setFirstChecked] = useState(false);
+  const [secondChecked, setSecondChecked] = useState(false);
 
   function getValue(e) {
     setPrice(e.target.value);
@@ -14,10 +15,14 @@ export default function Input({ onSearch }) {
     setFirstChecked(!firstChecked);
   }
 
+  function secondTimeChange() {
+    setSecondChecked(!secondChecked);
+  }
+
   function calculateLBTT(e) {
     e.preventDefault();
 
-    onSearch(price, firstChecked);
+    onSearch(price, firstChecked, secondChecked);
   }
 
   return (
@@ -29,7 +34,7 @@ export default function Input({ onSearch }) {
         First time buyer
       </label>
       <label>
-        <input type="checkbox"></input>
+        <input type="checkbox" onChange={secondTimeChange}></input>
         Purchasing as a second/additional home or buy-to-let property
       </label>
     </form>
