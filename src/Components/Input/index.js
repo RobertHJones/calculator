@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import "./index.css";
 
 export default function Input({ onSearch }) {
   const [price, setPrice] = useState("");
@@ -27,14 +28,30 @@ export default function Input({ onSearch }) {
 
   return (
     <form>
-      <input onChange={getValue} placeholder="£ Enter Purchase Price"></input>
-      <button onClick={calculateLBTT}>Calculate</button>
+      <input
+        className="price"
+        onChange={getValue}
+        placeholder="£ Enter Purchase Price"
+      ></input>
+      <button className="calculate" onClick={calculateLBTT}>
+        Calculate
+      </button>
+      <br></br>
       <label>
-        <input type="checkbox" onChange={handleChange}></input>
+        <input
+          className="check"
+          type="checkbox"
+          onChange={handleChange}
+        ></input>
         First time buyer
       </label>
+      <br></br>
       <label>
-        <input type="checkbox" onChange={secondTimeChange}></input>
+        <input
+          className="check"
+          type="checkbox"
+          onChange={secondTimeChange}
+        ></input>
         Purchasing as a second/additional home or buy-to-let property
       </label>
     </form>
