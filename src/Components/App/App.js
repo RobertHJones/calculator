@@ -87,7 +87,7 @@ function App() {
       }
     }
     if (secondChecked === true) {
-      if (Number.isFinite(newPrice) !== true || newPrice < 0) {
+      if (Number.isFinite(newPrice) !== true || newPrice <= 0) {
         setLbtt("");
         setError("Invalid price entered");
       } else if (checked === true) {
@@ -124,6 +124,13 @@ function App() {
   return (
     <div className="App">
       <h1>LBTT Calculator</h1>
+      <p>
+        To calculate the Land and Buildings Transaction Tax that may be payable
+        on your planned purchase, simply put the purchase price into the
+        calculator. It is important to note that this is an indicator only, your
+        solicitor or tax consultant will advise you as to the actual tax that
+        must be paid on completion.
+      </p>
       <Input onSearch={calculateLBTT} />
       <div>
         {lbtt === "" && <p></p>}
