@@ -3,7 +3,7 @@ import Input from "../Input";
 import { useState } from "react";
 
 function App() {
-  const [lbtt, setLbtt] = useState("");
+  const [lbtt, setLbtt] = useState(0);
   const [error, setError] = useState("");
   const [housePrice, setHousePrice] = useState("");
   function calculateLBTT(price, checked, secondChecked) {
@@ -137,8 +137,9 @@ function App() {
         {error !== "" && <p>{error}</p>}
         {lbtt !== "" && (
           <p>
-            You will pay £{lbtt} LBTT on a house price of £{housePrice} - an
-            effective rate of {(100 / (housePrice / lbtt)).toFixed(1)}%
+            You will pay £{lbtt.toFixed(0)} LBTT on a house price of £
+            {housePrice} - an effective rate of{" "}
+            {(100 / (housePrice / lbtt)).toFixed(1)}%
           </p>
         )}
       </div>
