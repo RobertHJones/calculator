@@ -3,7 +3,7 @@ import Input from "../Input";
 import { useState } from "react";
 
 function App() {
-  const [lbtt, setLbtt] = useState(0);
+  const [lbtt, setLbtt] = useState("");
   const [error, setError] = useState("");
   const [housePrice, setHousePrice] = useState("");
   function calculateLBTT(price, checked, secondChecked) {
